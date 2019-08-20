@@ -2,7 +2,7 @@
 
 3-hour workshop with a break, followed by some drinks and snacks.
 
-**IMPORTANT: **
+**IMPORTANT:**
 
 As this workshop has a limited capacity, we would like to make sure that we limit the amount of "no-shows" as much as possible. In order to achieve that, we...
 
