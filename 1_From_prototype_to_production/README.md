@@ -29,6 +29,6 @@ Note that besides a general overview we will not manage to cover all aspects in 
 
 **Workshop format:**
 
-You are invited to bring your laptop along, however we don't expect attendees to follow live, since the workshop will be fairly dense and we will have to skip some of the steps along the process. Note that we will not be able to support individuals during the workshop and also don't have any exercises or similar planned.
+You are invited to bring your laptop along, however we don't expect attendees to follow live, since the workshop will be fairly dense and we will have to skip some of the steps along the process. Note that we will not be able to support individuals with their laptops during the workshop and also don't have any exercises or similar planned.
 
 Materials will be made available and shared here, allowing you to follow the full process for our use-case example.
