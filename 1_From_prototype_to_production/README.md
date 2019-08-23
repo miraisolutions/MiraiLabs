@@ -1,4 +1,4 @@
-### Event 1 - From prototype to production
+### Event 1 - From prototype to production - 24 Sept. 2019
 
 3-hour workshop with a break, followed by some drinks and snacks.
 
