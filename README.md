@@ -9,3 +9,7 @@ Since we started, we have worked in many projects, given training and built an e
 It will benefit people who work with data or models on a daily basis and would like to expand or strengthen their skill set.
 
 In each workshop, an experienced practitioner will cover in some detail a topic relevant for any data scientist’s all-purpose toolkit. Materials will be made available and shared online in this repository.
+
+|   Date    |        Workshop Title        |             Subfolder link              |
+|-----------|------------------------------|-----------------------------------------|
+|2019-09-24 | from prototype to production | https://github.com/miraisolutions/MiraiLabs/tree/master/from-prototype-to-production |
