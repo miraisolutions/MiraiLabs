@@ -29,3 +29,9 @@ The workshop has been structured such that it is easy to follow, with the key el
 * [Meetup Event](https://www.meetup.com/MiraiLabs-Data-Science-Workshops/events/262582683/)
 * [Eventbrite](https://www.eventbrite.com/e/from-prototype-to-production-registration-70891746121)
 * [GitHub](https://github.com/miraisolutions/MiraiLabs)
+
+# Content
+
+| Folder | Description |
+|--------|-------------|
+| vbz-delays-prototype | Rmarkdown document with the exploratory code for downloading the data, manipulating and analysing it, and producing an output plot |
