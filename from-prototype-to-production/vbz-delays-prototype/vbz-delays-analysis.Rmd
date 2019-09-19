@@ -2,7 +2,9 @@
 title: "VBZ Delays Analysis"
 author: "Mirai Solutions"
 date: "`r Sys.time()`"
-output: html_document
+output: 
+  html_document:
+    number_sections: true
 ---
 
 ```{r setup, include=FALSE}
@@ -14,7 +16,7 @@ library(ggplot2)
 process_data <- TRUE
 ```
 
-# Intro
+# Introduction {-}
 
 References:
 
@@ -22,7 +24,7 @@ References:
 * Names translation: https://github.com/OpenDataDayZurich2016/translations/blob/master/Translation_Data_Attributes.pdf
 
 
-## 1 Data
+# Data
 
 Weekly data and corresponding resource IDs:
 
@@ -37,7 +39,7 @@ vbz_resources <- c(
 ```
 
 
-### 1.1.1 Download data
+## Download data
 
 Data are downloaded if not already available
 
@@ -60,7 +62,7 @@ lapply(names(vbz_resources), function(x) {
 ```
 
 
-### 1.1.2 Read all data
+## Read all data
 
 Load and transform data with package [**vroom**](https://vroom.r-lib.org/).
 
@@ -88,7 +90,7 @@ data <- vroom::vroom(
 ```
 
 
-### 1.1.3 Line Data manipulation
+## Line Data manipulation
 
 * Keep only tram lines (number < 30).
 * Extract the weekday.
@@ -111,7 +113,7 @@ data
 ```
 
 
-### 1.1.4 Save data by line
+## Save data by line
 
 ```{r, eval=process_data}
 line_data_dir <- "line-data"
@@ -126,17 +128,17 @@ lapply(unique(data$line), function(l) {
 ```
 
 
-## 2 Analysis
+# Analysis
 
 ```{r}
 line <- 11
 ```
 
 
-## 2.1 Analysis of delays for line `r line`
+# Analysis of delays for line `r line`
 
 
-### 2.1.1 Delays by hour for each weekday
+## Delays by hour for each weekday
 
 Read departure and arrival data
 
@@ -163,7 +165,7 @@ delays <- data %>%
 delays
 ```
 
-### 2.1.2 Visualize Analysis Results
+## Visualize Analysis Results
 
 Barplot of normalized delay counts by hour for each weekday, conditional on delays of at least 1 minute
 
