@@ -1,7 +1,7 @@
 VBZ Delays Analysis
 ================
 Mirai Solutions
-2019-09-20 09:18:41
+2019-09-20 09:29:02
 
 ## Introduction
 
@@ -156,7 +156,7 @@ lapply(unique(data$line), function(l) {
 
 ### Load line data
 
-Select the line and load the data
+Select the line and read departure and arrival data
 
 ``` r
 line <- 11
@@ -166,9 +166,7 @@ data <- readRDS(line_file)
 
 ### Analysis of delays for line 11
 
-Read departure and arrival data
-
-### Delays by hour for each weekday
+#### Delays by hour for each weekday
 
 Compute delays in minutes as the mean of departure and arrival delays,
 and compute delay counts by hour for each weekday
@@ -204,7 +202,7 @@ delays
 ## # … with 791 more rows
 ```
 
-### Visualize results
+#### Visualize results
 
 Barplot of normalized delay counts by hour for each weekday, conditional
 on delays of at least 1 minute
