@@ -21,9 +21,10 @@ library(ggplot2)
 process_data <- TRUE
 ```
 
+
 ## Introduction
 
-References:
+For each line in the Zurich public network system (VBZ), expected and actual arrival and departure times are available for each connection between two stations. Data are provided on a weekly basis as CSV files
 
 * Data: https://data.stadt-zuerich.ch/dataset/vbz_fahrzeiten_ogd
 * Names translation: https://github.com/OpenDataDayZurich2016/translations/blob/master/Translation_Data_Attributes.pdf
@@ -99,7 +100,7 @@ data <- vroom::vroom(
 
 * Keep only tram lines (number < 30).
 * Extract the weekday.
-* Define the hour as the scheduled departure time in hours from the beginning of the operating day (4AM). This implies that time after midnight is assigned and hour > 24.
+* Define the hour as the scheduled departure time in hours from the beginning of the operating day (4AM). This implies that time after midnight is assigned an hour > 24.
 
 ```{r, eval=process_data}
 data <- data %>%
@@ -145,8 +146,8 @@ line_file <- file.path("line-data", sprintf("line-%d.rds", line))
 data <- readRDS(line_file)
 ```
 
-### Analysis of delays for line `r line`
 
+### Analysis of delays for line `r line`
 
 #### Delays by hour for each weekday
 
