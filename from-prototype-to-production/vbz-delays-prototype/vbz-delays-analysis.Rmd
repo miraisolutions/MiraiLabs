@@ -2,9 +2,9 @@
 title: "VBZ Delays Analysis"
 author: "Mirai Solutions"
 date: "`r Sys.time()`"
-output: 
-  html_document:
-    number_sections: true
+output:
+  html_document: default
+  github_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -16,7 +16,7 @@ library(ggplot2)
 process_data <- TRUE
 ```
 
-# Introduction {-}
+## Introduction
 
 References:
 
@@ -24,7 +24,7 @@ References:
 * Names translation: https://github.com/OpenDataDayZurich2016/translations/blob/master/Translation_Data_Attributes.pdf
 
 
-# Data
+## Data handling
 
 Weekly data and corresponding resource IDs:
 
@@ -39,7 +39,7 @@ vbz_resources <- c(
 ```
 
 
-## Download data
+### Download data
 
 Data are downloaded if not already available
 
@@ -62,7 +62,7 @@ lapply(names(vbz_resources), function(x) {
 ```
 
 
-## Read all data
+### Read all data
 
 Load and transform data with package [**vroom**](https://vroom.r-lib.org/).
 
@@ -90,7 +90,7 @@ data <- vroom::vroom(
 ```
 
 
-## Line Data manipulation
+### Line data manipulation
 
 * Keep only tram lines (number < 30).
 * Extract the weekday.
@@ -113,7 +113,7 @@ data
 ```
 
 
-## Save data by line
+### Save data by line
 
 ```{r, eval=process_data}
 line_data_dir <- "line-data"
@@ -128,26 +128,29 @@ lapply(unique(data$line), function(l) {
 ```
 
 
-# Analysis
+## Analysis
+
+### Load line data
+
+Select the line and load the data
 
 ```{r}
 line <- 11
-```
-
-
-# Analysis of delays for line `r line`
-
-
-## Delays by hour for each weekday
-
-Read departure and arrival data
-
-```{r}
 line_file <- file.path("line-data", sprintf("line-%d.rds", line))
 data <- readRDS(line_file)
 ```
 
-Compute delays in minutes as the mean of departure and arrival delays and compute delay counts by hour for each weekday
+### Analysis of delays for line `r line`
+
+Read departure and arrival data
+
+```{r}
+```
+
+
+### Delays by hour for each weekday
+
+Compute delays in minutes as the mean of departure and arrival delays, and compute delay counts by hour for each weekday
 
 ```{r}
 delays <- data %>%
@@ -165,11 +168,11 @@ delays <- data %>%
 delays
 ```
 
-## Visualize Analysis Results
+### Visualize results
 
 Barplot of normalized delay counts by hour for each weekday, conditional on delays of at least 1 minute
 
-```{r, fig.asp=1.5}
+```{r delays-plot, fig.asp=1.5}
 delays %>% 
   filter(delay != "(-Inf,1]") %>%
   ggplot(aes(x = hour, y = count)) +
