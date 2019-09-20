@@ -9,6 +9,11 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
+```
+
+
+```{r, message=FALSE}
+# load packages
 library(dplyr)
 library(vroom)
 library(ggplot2)
@@ -79,8 +84,8 @@ data <- vroom::vroom(
   files,
   col_types = cols_types, altrep_opts = FALSE,
   col_select = c(
-    date = betriebsdatum,
     line = linie,
+    date = betriebsdatum,
     scheduled_departure = dplyr::matches("soll_ab_von"),
     actual_departure = dplyr::matches("ist_ab_von"),
     scheduled_arrival = dplyr::matches("soll_an_nach"),

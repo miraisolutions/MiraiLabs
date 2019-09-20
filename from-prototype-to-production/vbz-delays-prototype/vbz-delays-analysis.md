@@ -1,7 +1,16 @@
 VBZ Delays Analysis
 ================
 Mirai Solutions
-2019-09-20 09:29:02
+2019-09-20 13:52:08
+
+``` r
+# load packages
+library(dplyr)
+library(vroom)
+library(ggplot2)
+# set to FALSE if data have been already processed
+process_data <- TRUE
+```
 
 ## Introduction
 
@@ -71,8 +80,8 @@ data <- vroom::vroom(
   files,
   col_types = cols_types, altrep_opts = FALSE,
   col_select = c(
-    date = betriebsdatum,
     line = linie,
+    date = betriebsdatum,
     scheduled_departure = dplyr::matches("soll_ab_von"),
     actual_departure = dplyr::matches("ist_ab_von"),
     scheduled_arrival = dplyr::matches("soll_an_nach"),
@@ -106,18 +115,18 @@ data <- data %>%
 
 data
 ## # A tibble: 2,623,464 x 8
-##    date        line weekday  hour scheduled_depar… actual_departure
-##    <date>     <int> <ord>   <dbl>            <dbl>            <dbl>
-##  1 2019-07-14    10 Sun      5.11            18390            18333
-##  2 2019-07-14    10 Sun      5.61            20190            20192
-##  3 2019-07-14    10 Sun      5.86            21090            21103
-##  4 2019-07-14    10 Sun      6.11            21990            22063
-##  5 2019-07-14    10 Sun      6.36            22890            22883
-##  6 2019-07-14    10 Sun      6.61            23790            23690
-##  7 2019-07-14    10 Sun      6.86            24690            24733
-##  8 2019-07-14    10 Sun      7.11            25590            25584
-##  9 2019-07-14    10 Sun      7.36            26490            26473
-## 10 2019-07-14    10 Sun      7.61            27390            27436
+##     line date       weekday  hour scheduled_depar… actual_departure
+##    <int> <date>     <ord>   <dbl>            <dbl>            <dbl>
+##  1    10 2019-07-14 Sun      5.11            18390            18333
+##  2    10 2019-07-14 Sun      5.61            20190            20192
+##  3    10 2019-07-14 Sun      5.86            21090            21103
+##  4    10 2019-07-14 Sun      6.11            21990            22063
+##  5    10 2019-07-14 Sun      6.36            22890            22883
+##  6    10 2019-07-14 Sun      6.61            23790            23690
+##  7    10 2019-07-14 Sun      6.86            24690            24733
+##  8    10 2019-07-14 Sun      7.11            25590            25584
+##  9    10 2019-07-14 Sun      7.36            26490            26473
+## 10    10 2019-07-14 Sun      7.61            27390            27436
 ## # … with 2,623,454 more rows, and 2 more variables:
 ## #   scheduled_arrival <dbl>, actual_arrival <dbl>
 ```
