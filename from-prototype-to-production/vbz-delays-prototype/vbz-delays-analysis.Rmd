@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
 library(dplyr)
 library(vroom)
 library(ggplot2)
-# set to FALSE if data have been already processed
+# to save time, set to FALSE if data have been already processed
 process_data <- TRUE
 ```
 
@@ -100,7 +100,7 @@ data <- vroom::vroom(
 
 * Keep only tram lines (number < 30).
 * Extract the weekday.
-* Define the hour as the scheduled departure time in hours from the beginning of the operating day (4AM). This implies that time after midnight is assigned an hour > 24.
+* Define the hour as the scheduled departure time (in hours) from the midnight of the operating day. This implies that time after the next midnight but before the next operating day (4AM) is assigned an hour > 24.
 
 ```{r, eval=process_data}
 data <- data %>%

@@ -1,20 +1,22 @@
 VBZ Delays Analysis
 ================
 Mirai Solutions
-2019-09-20 13:52:08
+2019-09-23 23:04:02
 
 ``` r
 # load packages
 library(dplyr)
 library(vroom)
 library(ggplot2)
-# set to FALSE if data have been already processed
+# to save time, set to FALSE if data have been already processed
 process_data <- TRUE
 ```
 
 ## Introduction
 
-References:
+For each line in the Zurich public network system (VBZ), expected and
+actual arrival and departure times are available for each connection
+between two stations. Data are provided on a weekly basis as CSV files
 
   - Data: <https://data.stadt-zuerich.ch/dataset/vbz_fahrzeiten_ogd>
   - Names translation:
@@ -94,9 +96,10 @@ data <- vroom::vroom(
 
   - Keep only tram lines (number \< 30).
   - Extract the weekday.
-  - Define the hour as the scheduled departure time in hours from the
-    beginning of the operating day (4AM). This implies that time after
-    midnight is assigned and hour \> 24.
+  - Define the hour as the scheduled departure time (in hours) from the
+    midnight of the operating day. This implies that time after the next
+    midnight but before the next operating day (4AM) is assigned an hour
+    \> 24.
 
 <!-- end list -->
 
