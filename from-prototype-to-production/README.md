@@ -34,4 +34,4 @@ The workshop has been structured such that it is easy to follow, with the key el
 
 | Folder | Description |
 |--------|-------------|
-| vbz-delays-prototype | Rmarkdown document with the exploratory code for downloading the data, manipulating and analysing it, and producing an output plot |
+| vbz-delays-prototype | R Markdown document with the exploratory code for downloading the data, manipulating and analysing it, and producing an output plot |
