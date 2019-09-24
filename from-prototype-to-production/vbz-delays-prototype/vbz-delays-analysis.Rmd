@@ -174,7 +174,7 @@ delays
 
 #### Visualize results
 
-Barplot of normalized delay counts by hour for each weekday, conditional on delays of at least 1 minute
+Barplot of normalized delay counts by hour for each weekday, conditional on delays of higher than 1 minute
 
 ```{r delays-plot, fig.asp=1.5}
 delays %>% 
