@@ -1,7 +1,7 @@
 VBZ Delays Analysis
 ================
 Mirai Solutions
-2019-09-23 23:04:02
+2019-09-24 09:54:34
 
 ``` r
 # load packages
@@ -90,6 +90,22 @@ data <- vroom::vroom(
     actual_arrival = dplyr::matches("ist_an_nach")
   )
 )
+
+data
+## # A tibble: 5,681,118 x 6
+##     line date       scheduled_depar… actual_departure scheduled_arriv…
+##    <int> <date>                <dbl>            <dbl>            <dbl>
+##  1    10 2019-07-14            18390            18333            18468
+##  2    10 2019-07-14            20190            20192            20268
+##  3    10 2019-07-14            21090            21103            21168
+##  4    10 2019-07-14            21990            22063            22068
+##  5    10 2019-07-14            22890            22883            22968
+##  6    10 2019-07-14            23790            23690            23868
+##  7    10 2019-07-14            24690            24733            24768
+##  8    10 2019-07-14            25590            25584            25668
+##  9    10 2019-07-14            26490            26473            26568
+## 10    10 2019-07-14            27390            27436            27468
+## # … with 5,681,108 more rows, and 1 more variable: actual_arrival <dbl>
 ```
 
 ### Line data manipulation
@@ -174,6 +190,22 @@ Select the line and read departure and arrival data
 line <- 11
 line_file <- file.path("line-data", sprintf("line-%d.rds", line))
 data <- readRDS(line_file)
+data
+## # A tibble: 254,103 x 8
+##     line date       weekday  hour scheduled_depar… actual_departure
+##    <int> <date>     <ord>   <dbl>            <dbl>            <dbl>
+##  1    11 2019-07-16 Tue      25.1             3960             3943
+##  2    11 2019-07-17 Wed      25.1             3960             3965
+##  3    11 2019-07-18 Thu      25.1             3960             3935
+##  4    11 2019-07-19 Fri      24.9             3360             3489
+##  5    11 2019-07-19 Fri      25.1             3960             4034
+##  6    11 2019-07-20 Sat      24.9             3360             3401
+##  7    11 2019-07-20 Sat      25.1             3960             4015
+##  8    11 2019-07-14 Sun      25.1             3960             4033
+##  9    11 2019-07-15 Mon      25.1             3960             3954
+## 10    11 2019-07-17 Wed      24.7             2412             2414
+## # … with 254,093 more rows, and 2 more variables: scheduled_arrival <dbl>,
+## #   actual_arrival <dbl>
 ```
 
 ### Analysis of delays for line 11

@@ -93,6 +93,8 @@ data <- vroom::vroom(
     actual_arrival = dplyr::matches("ist_an_nach")
   )
 )
+
+data
 ```
 
 
@@ -144,6 +146,7 @@ Select the line and read departure and arrival data
 line <- 11
 line_file <- file.path("line-data", sprintf("line-%d.rds", line))
 data <- readRDS(line_file)
+data
 ```
 
 
