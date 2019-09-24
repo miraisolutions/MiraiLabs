@@ -1,0 +1,186 @@
+---
+title: "VBZ Delays Analysis"
+author: "Mirai Solutions"
+date: "`r Sys.time()`"
+output:
+  html_document: default
+  github_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
+```
+
+
+```{r, message=FALSE}
+# load packages
+library(dplyr)
+library(vroom)
+library(ggplot2)
+# to save time, set to FALSE if data have been already processed
+process_data <- TRUE
+```
+
+
+## Introduction
+
+For each line in the Zurich public network system (VBZ), expected and actual arrival and departure times are available for each connection between two stations. Data are provided on a weekly basis as CSV files
+
+* Data: https://data.stadt-zuerich.ch/dataset/vbz_fahrzeiten_ogd
+* Names translation: https://github.com/OpenDataDayZurich2016/translations/blob/master/Translation_Data_Attributes.pdf
+
+
+## Data handling
+
+Weekly data and corresponding resource IDs:
+
+```{r, eval=process_data}
+base_url <- "https://data.stadt-zuerich.ch/dataset/vbz_fahrzeiten_ogd/resource"
+vbz_resources <- c(
+  "20190714_20190720" = "9beb05c6-0153-4ffa-a928-8ff899bf5f1c",
+  "20190721_20190727" = "7883fd6e-e8f3-4ce4-82df-4944baa01a5b",
+  "20190728_20190803" = "5bec146e-ba16-4a6a-8f6b-44e4ed14bdb9",
+  "20190804_20190810" = "afdb312d-2855-4437-a8cd-f1c28dd97a79"
+)
+```
+
+
+### Download data
+
+Data are downloaded if not already available
+
+```{r, eval=process_data}
+raw_data_dir <- "data-raw"
+dir.create(raw_data_dir)
+lapply(names(vbz_resources), function(x) {
+  data_file <- sprintf("fahrzeiten_soll_ist_%s.csv", x)
+  path <- file.path("data-raw", data_file)
+  if (file.exists(path)) {
+    message("skip download of ", path)
+  } else {
+    download.file(
+      paste(base_url, vbz_resources[[x]], "download", data_file, sep = "/"),
+      destfile = path
+    )
+    message("downloaded ", path)
+  }
+}) %>% invisible()
+```
+
+
+### Read all data
+
+Load and transform data with package [**vroom**](https://vroom.r-lib.org/).
+
+```{r, eval=process_data}
+files <- file.path(
+  raw_data_dir, 
+  sprintf("fahrzeiten_soll_ist_%s.csv", names(vbz_resources))            
+)
+cols_types <- vroom::cols(
+  betriebsdatum = vroom::col_date("%d.%m.%y"),
+  linie = "i" # integer
+)
+data <- vroom::vroom(
+  files,
+  col_types = cols_types, altrep_opts = FALSE,
+  col_select = c(
+    line = linie,
+    date = betriebsdatum,
+    scheduled_departure = dplyr::matches("soll_ab_von"),
+    actual_departure = dplyr::matches("ist_ab_von"),
+    scheduled_arrival = dplyr::matches("soll_an_nach"),
+    actual_arrival = dplyr::matches("ist_an_nach")
+  )
+)
+
+data
+```
+
+
+### Line data manipulation
+
+* Keep only tram lines (number < 30).
+* Extract the weekday.
+* Define the hour as the scheduled departure time (in hours) from the midnight of the operating day. This implies that time after the next midnight but before the next operating day (4AM) is assigned an hour > 24.
+
+```{r, eval=process_data}
+data <- data %>%
+  filter(line < 30) %>%
+  mutate(
+    weekday = lubridate::wday(
+      date, label = TRUE, 
+      locale = "en_US.UTF-8", week_start = 1
+    ),
+    hour = (scheduled_departure/3600),
+    hour = ifelse(hour < 4, hour + 24, hour)
+  ) %>% 
+  select(grep("arr|dep", names(.), invert = TRUE, value = TRUE), everything())
+
+data
+```
+
+
+### Save data by line
+
+```{r, eval=process_data}
+line_data_dir <- "line-data"
+dir.create(line_data_dir)
+lapply(unique(data$line), function(l) {
+  line_rds <- file.path(line_data_dir, sprintf("line-%d.rds", l))
+  data %>%
+    filter(line == l) %>%
+    saveRDS(file = line_rds)
+  message("saved ", line_rds)
+}) %>% invisible()
+```
+
+
+## Analysis
+
+### Load line data
+
+Select the line and read departure and arrival data
+
+```{r}
+line <- 11
+line_file <- file.path("line-data", sprintf("line-%d.rds", line))
+data <- readRDS(line_file)
+data
+```
+
+
+### Analysis of delays for line `r line`
+
+#### Delays by hour for each weekday
+
+Compute delays in minutes as the mean of departure and arrival delays, and compute delay counts by hour for each weekday
+
+```{r}
+delays <- data %>%
+  mutate(
+    delay = ((actual_departure - scheduled_departure) +
+               (actual_arrival - scheduled_arrival)) / 2 / 60
+  ) %>% 
+  group_by(
+    weekday,
+    hour = cut(hour, 0:48, labels = ifelse(0:47 < 24, 0:47, paste0("+", floor(0:47) - 24))),
+    delay = cut(delay, c(-Inf, 1:5, Inf))
+  ) %>% 
+  summarize(count = n())
+
+delays
+```
+
+#### Visualize results
+
+Barplot of normalized delay counts by hour for each weekday, conditional on delays of higher than 1 minute
+
+```{r delays-plot, fig.asp=1.5}
+delays %>% 
+  filter(delay != "(-Inf,1]") %>%
+  ggplot(aes(x = hour, y = count)) +
+  geom_col(aes(fill = delay), position = "fill") +
+  lemon::facet_rep_wrap(~weekday, ncol = 1, repeat.tick.labels = TRUE) +
+  theme(legend.justification = "top")
+```

@@ -1,0 +1,3 @@
+*.Rproj
+data-raw/fahrzeiten_*.csv
+*.html
