@@ -32,6 +32,7 @@ The workshop has been structured such that it is easy to follow, with the key el
 
 # Content
 
-| Folder | Description |
+| Material | Description |
 |--------|-------------|
+| [MiraiLabs_from-prototype-to-production_slides.pdf](MiraiLabs_from-prototype-to-production_slides.pdf) | Reference slides for workshop |
 | [vbz-delays-prototype](vbz-delays-prototype) | R Markdown document with the exploratory code for downloading the data, manipulating and analysing it, and producing an output plot |
