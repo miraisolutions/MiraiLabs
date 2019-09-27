@@ -19,7 +19,7 @@ options(
 )
 ```
 
-Create the package
+Create the package:
 
 ```r
 devtools::create("~/Desktop/vbzdelays", fields = list(
