@@ -127,7 +127,7 @@ Commit & push.
 
 ### Plotting functionality  
 
-In a new source file `R/plot.R`, define an (internal) function  `barplot_by_weekday_hour` (core plot functionality) and an exported, documented `plot_delays_by_weekday_hour()` for creating the plot of a given line. Include the relevant `@import dplyr`, `@import ggplot2` tags.
+In a new source file `R/plot.R`, define an (internal) function  `barplot_by_weekday_hour()` (core plot functionality) and an exported, documented `plot_delays_by_weekday_hour()` for creating the plot of a given line. Include the relevant `@import dplyr`, `@import ggplot2` tags.
 
 Declare a dependency on ggplot2 via `usethis::use_package("ggplot2")`, generate documentation and install the package.
 
