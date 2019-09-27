@@ -11,11 +11,11 @@ Set general author and license information
 
 ``` r
 options(
-usethis.description = list(
-`Authors@R` = 'person("Mirai", "Labs", email = "labs@mirai-solutions.com",
-role = c("aut", "cre"))',
-License = "GPL-3"
-)
+  usethis.description = list(
+    `Authors@R` = 'person("Mirai", "Labs", email = "labs@mirai-solutions.com",
+    role = c("aut", "cre"))',
+    License = "GPL-3"
+  )
 )
 ```
 
@@ -23,9 +23,9 @@ Create the package
 
 ```r
 devtools::create("~/Desktop/vbzdelays", fields = list(
-Title = "VBZ Delay Analysis",
-Description = "Analyze VBZ delays.",
-Depends = "R (>= 3.5.0)" # support for RDS version 3
+  Title = "VBZ Delay Analysis",
+  Description = "Analyze VBZ delays.",
+  Depends = "R (>= 3.5.0)" # support for RDS version 3
 ))
 ```
 
@@ -204,12 +204,12 @@ before_deploy:
 - Rscript -e "vbzdelays::render_site()"
 
 deploy:
-provider: pages
-skip_cleanup: true
-github_token: $GITHUB_PAT # Set in the settings page of your repository, as a secure variable
-local_dir: _site
-on:
-branch: master
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_PAT # Set in the settings page of your repository, as a secure variable
+  local_dir: _site
+  on:
+    branch: master
 ```
 
 Commit & push, check the progress on Travis, and then browse to the rendered website  https://USERNAME.github.io/vbzdelays.
