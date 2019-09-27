@@ -7,7 +7,7 @@ Most of the R package development steps are carried out using the well-establish
 
 ### Create the vbzdelays package
 
-Set general author and license information
+Set general author and license information:
 
 ``` r
 options(
