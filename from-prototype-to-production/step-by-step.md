@@ -175,7 +175,7 @@ Run checks locally, commit & push.
 
 ### Setup GitHub Pages branch
 
-At the system shell, run
+In the terminal, run:
 ``` bash
 git checkout --orphan gh-pages
 git rm -rf .
