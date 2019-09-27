@@ -13,7 +13,7 @@ Set general author and license information
 options(
   usethis.description = list(
     `Authors@R` = 'person("Mirai", "Labs", email = "labs@mirai-solutions.com",
-    role = c("aut", "cre"))',
+                          role = c("aut", "cre"))',
     License = "GPL-3"
   )
 )
