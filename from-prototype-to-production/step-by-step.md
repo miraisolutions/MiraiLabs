@@ -43,7 +43,7 @@ From the Git pane at the top-right of RStudio (You may have to close and re-open
 
 Create a remote repository `vbzdelays` on GitHub for your `<USERNAME>`, refusing to create initial files but copying the `.git` URL of the form `https://github.com/<USERNAME>/vbzdelays.git`.
 
-From the shell, set the remote repo for the local one created above
+From the shell, set the remote repository for the local version of  `vbzdelays` .
 
 ``` bash
 git remote add origin https://github.com/<USERNAME>/vbzdelays.git
