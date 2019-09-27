@@ -122,7 +122,7 @@ Commit & push.
 
 - Refactor `compute_delay()` using `mean()`.
 - Commit & push => Travis will fail due to the broken unit test.
-- Revert via `git revert HEAD` at the system shell.
+- Revert via `git revert HEAD` in the terminal.
 
 
 ### Plotting functionality  
