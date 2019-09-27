@@ -238,7 +238,7 @@ Setup branch restrictions and agile setup as GitHub project (check slides).
 
 ### New feature 
 
-New branch for a new feature `feature/1-add-coverage-label`, created on GitHub from `develop`. Implement the feature in the local checkout of `feature/1-add-coverage-label`.
+From `develop`, create on GitHub a novel branch for the new feature `feature/1-add-coverage-label`. Implement the feature in the local checkout of `feature/1-add-coverage-label`.
 
 - Extend `analysis.R` and `plot.R`, run tests and examples to see the outcome.
 - Add a bullet about the new feature in the development section of `NEWS.md`.
