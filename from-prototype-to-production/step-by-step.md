@@ -196,7 +196,7 @@ Setup Travis CI to automatically render and deploy the website to GitHub pages u
 
 See the slides for the creation of a Personal Access Token (PAT) on GitHub and definition of the secure variable `GITHUB_PAT` on Travis.
 
-Ad the following to `.travis.yaml`:
+Add the following to `.travis.yaml`:
 
 ``` yaml
 before_deploy:
