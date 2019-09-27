@@ -162,7 +162,7 @@ Run checks locally, commit & push.
 
 - Include website index and results chapter R Markdown as `inst/site/index.Rmd` and `inst/site/01-results-by-line.Rmd`.
 - Define a new, exported and documented function `available_lines()` in `R/data.R`, used in the R Markdown above to loop over the available lines.
-- In a new source file `R/site.R`, define an exported, documented `render_render_site()`.
+- In a new source file `R/site.R`, define an exported, documented `render_render_site()` function.
 - Declare new dependency via `usethis::use_package("bookdown")`.
 - Generate documentation, install.
 - Test website rendering at the command line:
