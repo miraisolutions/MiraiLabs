@@ -222,7 +222,7 @@ We want to start using semantic versioning for the vbzdelays package to track fu
 - Setup a changelog as `NEWS.md` file via `usethis::use_news_md()`, adding relevant information about this first version of the package.
 - Define a new major version (1.0.0) via `usethis::use_version("major")`.
 - Commit & push.
-- Create release on GitHub as "v1.0.0", with title "vbzdelays 1.0.0" and content of the corresponding `NEWS.md` section.
+- Create release on GitHub as "v1.0.0", with title "vbzdelays 1.0.0" and as content the corresponding `NEWS.md` section.
 
 
 ### GitFlow setup
