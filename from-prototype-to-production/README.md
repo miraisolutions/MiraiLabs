@@ -36,3 +36,6 @@ The workshop has been structured such that it is easy to follow, with the key el
 |--------|-------------|
 | [MiraiLabs_from-prototype-to-production_slides.pdf](MiraiLabs_from-prototype-to-production_slides.pdf) | Reference slides for workshop |
 | [vbz-delays-prototype](vbz-delays-prototype) | R Markdown document with the exploratory code for downloading the data, manipulating and analysing it, and producing an output plot |
+| [vbzdelays](https://github.com/miraisolutions/vbzdelays) | GitHub repository of the R package representing the outcome of the workshop |
+| [Delay analysis website](https://miraisolutions.github.io/vbzdelays/) | Website representing the target product of the workshop |
+| [step-by-step.md](step-by-step.md) | Details of the technical steps demonstrated live during the workshop |
