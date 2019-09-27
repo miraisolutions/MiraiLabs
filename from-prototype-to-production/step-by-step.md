@@ -250,7 +250,7 @@ From `develop`, create on GitHub a novel branch for the new feature `feature/1-a
 
 We want to release the new feature(s) as a minor release with version 1.1.0
 
-- Create branch `release/v1.1.0` from `develop`.
+- Create release branch `release/v1.1.0` from `develop`.
 - Update the package version via `usethis::use_version("minor")` locally on branch `release/v1.1.0`.
 - Commit & push.
 - Create a pull request to `master` on GitHub, get it approved and merged.
