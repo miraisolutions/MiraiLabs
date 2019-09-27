@@ -185,7 +185,7 @@ git commit -m "Initial commit"
 git push origin gh-pages
 ```
 
-You should see an Hello World website at https://USERNAME.github.io/vbzdelays.
+You should see an "Hello World" website at https://USERNAME.github.io/vbzdelays.
 
 Switch back to the `master` branch.
 
