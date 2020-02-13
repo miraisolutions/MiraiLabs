@@ -2,12 +2,16 @@
 
 # Overview
 
-In this workshop, we will discuss how to share your data science work through APIs. Specifically, we will tackle the case of providing systematic access to your R computational processes, creating an API with the package plumber. In a hands-on session, we will demonstrate how to transform a simple R program into a web service, we will show how to create and expose an API, and we will give an overview of best practices and common security concerns.
+In this workshop, we will discuss how to share your data science work through APIs. Specifically, we will tackle the case of providing systematic access to your R computational processes, creating an API with the package plumber. 
+
+In a hands-on session, we will demonstrate how to transform a simple R program into a web service, we will show how to create and expose an API, and we will give an overview of best practices and common security concerns.
 
 # Schedule
 
 When: March 24th 2020.
+
 Where: KV Business School Zürich AG, Bildungszentrum Sihlpost.
+
 What: 3-hour workshop with two short breaks, followed by some drinks and snacks. 
 * 4:00 pm - doors open
 * 4:15 pm - 7:00 workshop, including breaks
