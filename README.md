@@ -13,3 +13,5 @@ In each workshop, an experienced practitioner will cover in some detail a topic 
 |   Date    |        Workshop        |
 |-----------|------------------------------|
 |2019-09-24 | [From prototype to production](from-prototype-to-production) |
+|-----------|------------------------------|
+|2020-03-24 | [Transform your R code into a web API with plumber](transform-your-R-code-into-API-with-plumber) |
