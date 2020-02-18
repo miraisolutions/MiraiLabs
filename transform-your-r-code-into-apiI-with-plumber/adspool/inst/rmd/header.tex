@@ -1,0 +1,30 @@
+\usepackage{fancyhdr}
+\makeatletter
+%\@ifpackageloaded{xcolor}{}{\usepackage{xcolor}}
+\makeatother
+
+%set up page style
+\pagestyle{plain}
+\fancypagestyle{plain}{
+\fancyhf{}
+\fancyhead[R]{ \includegraphics[width=4cm]{mirai.pdf}}
+\fancyfoot[L]{\copyright~\the\year~Mirai Solutions GmbH}
+\fancyfoot[C]{\thepage}
+\renewcommand*{\headrulewidth}{0pt}
+%\renewcommand*{\footrulewidth}{0.4pt}
+}
+\pagestyle{plain}
+
+
+
+% Support for multi-column output
+\newcommand{\columnsbegin}{\begin{columns}}
+\newcommand{\columnsend}{\end{columns}}
+\newcommand{\solutionsbegin}{\begin{solutions}}
+\newcommand{\solutionsend}{\end{solutions}}
+
+% Define Mirai blue
+%\definecolor{mirai}{rgb}{0.243,0.565,0.804}
+
+% Define colors
+\hypersetup{colorlinks,citecolor=[rgb]{0.243,0.565,0.804},filecolor=[rgb]{0.243,0.565,0.804},linkcolor=[rgb]{0.243,0.565,0.804},urlcolor=[rgb]{0.243,0.565,0.804}}

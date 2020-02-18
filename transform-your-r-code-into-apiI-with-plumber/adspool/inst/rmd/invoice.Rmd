@@ -1,0 +1,38 @@
+---
+title: "Invoice"
+author: "Mirai Solutions"
+date: '`r format(Sys.Date(), "%Y-%B-%d")`'
+output: 
+    pdf_document:
+      latex_engine: xelatex
+      includes:
+        in_header: header.tex
+params:
+    client_id: NA
+    invoice_detail: NA
+    invoice_summary: NA
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Invoice
+
+Dear client `r params$client_id`!
+
+This is your invoice:  
+
+```{r echo = FALSE, results = "asis"}
+knitr::kable(params$invoice_detail[c("name", "click_count", "click_rate", "amount")] %>% set_colnames(c("Advertisement", "Nr. clicks", "Price", "Amount")))
+             
+```
+```{r echo = FALSE, results = "asis"}
+knitr::kable(t(params$invoice_summary), position = "r")
+```
+
+
+Please pay ASAP!
+
+<!-- You owe us `r params$curr_invoice` $. Pay ASAP! -->
+

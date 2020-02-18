@@ -1,0 +1,17 @@
+Package: adspool
+Type: Package
+Title: Advertisement Dataset generator
+Version: 0.1.0
+Author:  Gustavo Martinez, Francesca Vitalini
+Maintainer: Gustavo Martinez <gustavo.martinez@mirai-solutions.com>, Francesca Vitalini <francesca.vitalini@mirai-solutions.com>
+Description: Prepares advertisement dataset for MiraiLabs/"Transform your R code in an API with pluber".
+Depends: R (>= 3.5),
+         dplyr,
+         magrittr
+Imports: reshape2,
+         assertthat,
+         gapminder
+License: GNU General Public License
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.2

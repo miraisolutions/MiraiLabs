@@ -36,4 +36,5 @@ The workshop will be hands on, so it is advisable to bring along a laptop. All n
 
 # Content
 
-TBD
+* Package to generate dataset used in the workshop [adspool](adspool) 
+
