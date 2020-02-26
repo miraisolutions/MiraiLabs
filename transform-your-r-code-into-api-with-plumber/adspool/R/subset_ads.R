@@ -5,10 +5,10 @@
 #'  - a dataframe ads, with minimal structure "ads" "subcats" "cats" "client";
 #'
 #' @param ad_id advertisement id. Integer positive number.
-#' @param ad_name advertisement name. Character vector with the name of the advertisement
-#' @param ad_cat category of the advertisements to return. Character vector.
-#' @param ad_subcat subcategory of the advertisements to return. Character vector.
-#' @param ad_client client of the advertisements to return. Character vector.
+#' @param ad_name advertisement name. String with the name of the advertisement
+#' @param ad_cat category of the advertisements to return. String.
+#' @param ad_subcat subcategory of the advertisements to return. String.
+#' @param ad_client client of the advertisements to return. String.
 #'
 #' @return \code{dataframe}, a subset of the ads that match the given parameters.
 #' \code{ad_name}, \code{ad_cat} and \code{ad_subcat} are matched by pattern, \code{ad_id} and \code{client_id} exact match.

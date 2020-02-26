@@ -15,13 +15,13 @@ subset_ads(
 \arguments{
 \item{ad_id}{advertisement id. Integer positive number.}
 
-\item{ad_name}{advertisement name. Character vector with the name of the advertisement}
+\item{ad_name}{advertisement name. String with the name of the advertisement}
 
-\item{ad_cat}{category of the advertisements to return. Character vector.}
+\item{ad_cat}{category of the advertisements to return. String.}
 
-\item{ad_subcat}{subcategory of the advertisements to return. Character vector.}
+\item{ad_subcat}{subcategory of the advertisements to return. String.}
 
-\item{ad_client}{client of the advertisements to return. Character vector.}
+\item{ad_client}{client of the advertisements to return. String.}
 }
 \value{
 \code{dataframe}, a subset of the ads that match the given parameters.
