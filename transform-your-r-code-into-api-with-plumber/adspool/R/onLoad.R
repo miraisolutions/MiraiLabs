@@ -10,11 +10,16 @@
 #' @importFrom stats runif
 .onLoad <- function(libname, pkgname){
 
-    # TODO: Consider re-locating these files once in Renku
+    # Consider re-locating these files once in Renku
+    if length(Sys.getenv("TMP_PATH") > 0 ) {
+        tmp_path <- Sys.getenv("TMP_PATH")
+    } else {
+        tmp_path <- Sys.getenv("HOME")
+    }
     options(
-        ads_file = file.path(Sys.getenv("HOME"), "ads.csv"),
-        users_file = file.path(Sys.getenv("HOME"), "users.rds"),
-        logging_file = file.path(Sys.getenv("HOME"), "logging.txt"),
+        ads_file = file.path(tmp_path, "ads.csv"),
+        users_file = file.path(tmp_path, "users.rds"),
+        logging_file = file.path(tmp_path, "logging.txt"),
         stringsAsFactors = FALSE
     )
 
