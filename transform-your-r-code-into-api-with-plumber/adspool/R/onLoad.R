@@ -11,7 +11,7 @@
 .onLoad <- function(libname, pkgname){
 
     # Consider re-locating these files once in Renku
-    if length(Sys.getenv("TMP_PATH") > 0 ) {
+    if (Sys.getenv("TMP_PATH") != "") {
         tmp_path <- Sys.getenv("TMP_PATH")
     } else {
         tmp_path <- Sys.getenv("HOME")
