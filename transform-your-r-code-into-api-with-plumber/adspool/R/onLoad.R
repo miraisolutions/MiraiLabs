@@ -13,13 +13,14 @@
     # Consider re-locating these files once in Renku
     if (Sys.getenv("TMP_PATH") != "") {
         tmp_path <- Sys.getenv("TMP_PATH")
+        dir.create(tmp_path)
     } else {
         tmp_path <- Sys.getenv("HOME")
     }
     options(
         ads_file = file.path(tmp_path, "ads.csv"),
         users_file = file.path(tmp_path, "users.rds"),
-        logging_file = file.path(tmp_path, "logging.txt"),
+        logging_file = file.path(tmp_path, "adspool.log"),
         stringsAsFactors = FALSE
     )
 
@@ -135,5 +136,5 @@
     # Update data in disk, ensuring persistence accross sessions.
     if (!file.exists(getOption("ads_file"))) write.ads(ads)
     if (!file.exists(getOption("users_file"))) write.users(users)
-    if (!file.exists(getOption("logging_file"))) write.logs(as.character(Sys.time()))
+    if (!file.exists(getOption("logging_file"))) write.logs(sprintf("%s - adspool loaded", Sys.time()))
 }
