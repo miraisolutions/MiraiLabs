@@ -1,4 +1,4 @@
-### Event 2 - Sharing your data science work: Transform your R code into a web API with plumber - 24 March 2020
+### Event 2 - Sharing your data science work: Transform your R code into a web API with plumber - 29th October 2020
 
 # Overview
 
@@ -8,7 +8,7 @@ In a hands-on session, we will demonstrate how to transform a simple R program i
 
 # Schedule
 
-When: March 24th 2020.
+When: October 29th 2020.
 
 Where: KV Business School Zürich AG, Bildungszentrum Sihlpost.
 
