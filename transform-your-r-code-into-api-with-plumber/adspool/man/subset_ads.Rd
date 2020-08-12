@@ -9,7 +9,7 @@ subset_ads(
   ad_name = NULL,
   ad_cat = NULL,
   ad_subcat = NULL,
-  ad_client = NULL
+  ad_customer = NULL
 )
 }
 \arguments{
@@ -21,14 +21,14 @@ subset_ads(
 
 \item{ad_subcat}{subcategory of the advertisements to return. String.}
 
-\item{ad_client}{client of the advertisements to return. String.}
+\item{ad_customer}{customer of the advertisements to return. String.}
 }
 \value{
 \code{dataframe}, a subset of the ads that match the given parameters.
-\code{ad_name}, \code{ad_cat} and \code{ad_subcat} are matched by pattern, \code{ad_id} and \code{client_id} exact match.
+\code{ad_name}, \code{ad_cat} and \code{ad_subcat} are matched by pattern, \code{ad_id} and \code{customer_id} exact match.
 }
 \description{
 Return subset of the dataframe of advertisements via filtering.
 The function assumes the existence of a file "ads_file":
- - a dataframe ads, with minimal structure "ads" "subcats" "cats" "client";
+ - a dataframe ads, with minimal structure "ads" "subcats" "cats" "customer";
 }

@@ -8,7 +8,7 @@ add_ad(
   newad,
   newad_cat = NULL,
   newad_subcat = NULL,
-  newad_client,
+  newad_customer,
   newad_click_rate
 )
 }
@@ -19,7 +19,7 @@ add_ad(
 
 \item{newad_subcat}{new advertisement subcategory. Character string of name of new advertisement subcategory. If unavailable a random subcategory from those already available in catsToSubcats and associated with the given category will be used.}
 
-\item{newad_client}{new advertisement category. Integer indicating the client id.}
+\item{newad_customer}{new advertisement category. Integer indicating the customer id.}
 
 \item{newad_click_rate}{new advertisement rate.}
 }
@@ -29,5 +29,5 @@ dataframe
 \description{
 Add a new advertisement to the dataframe of advertisements.
 The function assumes the existence of a file "ads_file":
- - a dataframe ads, with minimal structure "ads" "subcats" "cats" "client";
+ - a dataframe ads, with minimal structure "ads" "subcats" "cats" "customer";
 }

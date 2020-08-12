@@ -9,7 +9,7 @@ update_ad(
   ad_name = NULL,
   ad_cat = NULL,
   ad_subcat = NULL,
-  ad_client = NULL,
+  ad_customer = NULL,
   ad_click_count = NULL,
   ad_click_rate = NULL
 )
@@ -23,7 +23,7 @@ update_ad(
 
 \item{ad_subcat}{subcategory of the advertisements to return. Character vector.}
 
-\item{ad_client}{client of the advertisements to return. Character vector.}
+\item{ad_customer}{customer of the advertisements to return. Character vector.}
 
 \item{ad_click_count}{click count}
 

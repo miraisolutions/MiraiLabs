@@ -9,7 +9,7 @@ remove_ads(
   ad_name = NULL,
   ad_cat = NULL,
   ad_subcat = NULL,
-  ad_client = NULL
+  ad_customer = NULL
 )
 }
 \arguments{
@@ -21,7 +21,7 @@ remove_ads(
 
 \item{ad_subcat}{subcategory of the advertisements to return. Character vector.}
 
-\item{ad_client}{client of the advertisements to return. Character vector.}
+\item{ad_customer}{customer of the advertisements to return. Character vector.}
 }
 \value{
 dataframe
