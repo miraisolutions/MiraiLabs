@@ -25,7 +25,7 @@
     )
 
     # params ----
-    n_clients <- 10 # number of clients - client_id is a number in the range 1:n_clients
+    n_customers <- 10 # number of customers - customer_id is a number in the range 1:n_customers
     n_users <- 10  # number of users - user_id is a number in the range 1:n_users
     n_history <- 5 # number of categories stored in browser history per user
     n_session <- 5 # number of sub-categories stored in session per user
@@ -81,25 +81,25 @@
         set_names(c("subcats", "cats")) %>%
         mutate(subcats = as.character(subcats))
 
-    adsToClient <- subcatsToAds %>%
+    adsToCustomer <- subcatsToAds %>%
         select(ads) %>%
         distinct() %>%
-        mutate("client" = sample.int(n_clients,
+        mutate("customer" = sample.int(n_customers,
                                      length(unique(subcatsToAds$ads)),
                                      replace = TRUE)) %>%
         mutate(ads = as.character(ads))
 
     ads <- left_join(left_join(subcatsToAds, catsToSubcats),
-                     adsToClient) %>%
+                     adsToCustomer) %>%
         mutate(id = as.integer(row.names(.)),
                name = ads,
                category = cats,
                subcategory = subcats,
                img_path = sprintf("%03d_%s.jpeg", id, gsub("\\W", "", ads)),
-               client_id = client,
+               customer_id = customer,
                click_count = as.integer(floor(runif(nrow(.), min = 0, max = 301))),
                click_rate = sample(1:3 * 1e-2, nrow(.), replace = TRUE)) %>%
-        .[c("id", "name", "category", "subcategory", "img_path", "client_id", "click_count", "click_rate")]
+        .[c("id", "name", "category", "subcategory", "img_path", "customer_id", "click_count", "click_rate")]
     # users ----
 
     users <- bind_cols(

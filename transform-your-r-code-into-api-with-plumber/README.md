@@ -36,5 +36,9 @@ The workshop will be hands on, so it is advisable to bring along a laptop. All n
 
 # Content
 
-* Package to generate dataset used in the workshop [adspool](adspool) 
+For this interactive workshop we have prepared materials in [renkulab](https://renkulab.io/). The intention is that each of the participants forks a project and spins up their own RStudio environment in renkulab, following instructions in [presentation in this folder]()
+
+* [adspool](adspool) Package providing datasets, files and functions used in the workshop examples 
+* [renkulab/mirailabs-2-0](renkulab/mirailabs-2-0) content of the project in renkulab that the participants are asked to fork
+* [renkulab/mirailabs2dependencies](renkulab/mirailabs2dependencies) content of a second project in renkulab used for building the required dependencies. This project generates a Docker image used by mirailabs-2-0, reducing the environment creation time
 

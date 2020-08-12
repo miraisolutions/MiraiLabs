@@ -20,9 +20,9 @@ test_that("Subset by subcat", {
     testthat::expect(nrow(res) > 0, "Subset by subcategory failed")
 })
 
-test_that("Subset by client", {
-    res <- subset_ads(ad_client = 1)
-    testthat::expect(nrow(res) > 0, "Subset by client failed")
+test_that("Subset by customer", {
+    res <- subset_ads(ad_customer = 1)
+    testthat::expect(nrow(res) > 0, "Subset by customer failed")
 })
 
 test_that("Subset by cat and subcat", {
