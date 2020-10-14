@@ -1,0 +1,11 @@
+'@context':
+  created: schema:dateCreated
+  schema: http://schema.org/
+  name: schema:name
+  updated: schema:dateUpdated
+  version: schema:schemaVersion
+'@type': schema:Project
+created: 2020-01-16T08:35:51.936Z
+name: MiraiLabs 2.0
+updated: 2020-01-16T08:35:51.936Z
+version: '1'
