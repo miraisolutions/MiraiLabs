@@ -36,7 +36,7 @@ The workshop will be hands on, so it is advisable to bring along a laptop. All n
 
 # Content
 
-For this interactive workshop we have prepared materials in [renkulab](https://renkulab.io/). The intention is that each of the participants forks a project and spins up their own RStudio environment in renkulab, following instructions in [presentation in this folder]()
+For this interactive workshop we have prepared materials in [renkulab](https://renkulab.io/). The intention is that each of the participants forks a project and spins up their own RStudio environment in renkulab, following instructions in [presentation in this folder](https://github.com/miraisolutions/MiraiLabs/blob/master/transform-your-r-code-into-api-with-plumber/workshop_MiraiLabs2_slides.pdf)
 
 * [adspool](adspool) Package providing datasets, files and functions used in the workshop examples 
 * [renkulab/mirailabs-2-0](renkulab/mirailabs-2-0) content of the project in renkulab that the participants are asked to fork
