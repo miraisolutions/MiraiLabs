@@ -1,0 +1,112 @@
+
+---
+title: "Workshop R, arrow, dplyr"
+output:
+  html_document:
+    toc: true
+---
+
+
+```{r}
+require(arrow)
+require(dplyr, warn.conflicts=FALSE)
+require(stringr)
+require(purrr)
+```
+
+
+```{r}
+tags_schema <- schema(
+  field("Id", int64(), nullable = FALSE),
+  field("TagName", string(), nullable = FALSE),
+  field("Count", int32(), nullable = FALSE),
+  field("ExcerptPostId", int64(), nullable = TRUE),
+  field("WikiPostId", int64(), nullable = TRUE)
+)
+tags <- open_dataset("/dbfs/mnt/mirai/so/tags.parquet", schema = tags_schema, format = "parquet")
+
+posts_schema = schema(
+  field("Id", int64(), nullable = FALSE),
+  field("PostTypeId", int16(), nullable = FALSE),
+  field("AcceptedAnswerId", int64(), nullable = TRUE),
+  field("ParentId", int64(), nullable = TRUE),
+  field("CreationDate", timestamp(), nullable = FALSE),
+  field("Score", int32(), nullable = FALSE),
+  field("ViewCount", int32(), nullable = TRUE),
+  field("Body", string(), nullable = FALSE),
+  field("OwnerUserId", int64(), nullable = TRUE),
+  field("OwnerDisplayName", string(), nullable = TRUE),
+  field("LastEditorUserId", int64(), nullable = TRUE),
+  field("LastEditorDisplayName", string(), nullable = TRUE),
+  field("LastEditDate", timestamp(), nullable = TRUE),
+  field("LastActivityDate", timestamp(), nullable = FALSE),
+  field("Title", string(), nullable = TRUE),
+  field("Tags", string(), nullable = TRUE),
+  field("AnswerCount", int32(), nullable = TRUE),
+  field("CommentCount", int32(), nullable = TRUE),
+  field("ClosedDate", timestamp(), nullable = TRUE),
+  field("CommunityOwnedDate", timestamp(), nullable = TRUE),
+  field("ContentLicense", string(), nullable = FALSE)
+)
+posts <- open_dataset("/dbfs/mnt/mirai/so/posts.parquet", schema = posts_schema, format = "parquet")
+```
+
+
+```{r}
+spark_tag_wiki_post_ids <- (
+  posts %>%
+  # IMPORTANT: use two separate filters for improved performance
+  filter(PostTypeId %in% c(4, 5)) %>% # which post types are tag wiki entries?
+  filter(str_detect(Body, regex("(apache spark)|(spark\\.apache\\.org)", ignore_case = TRUE))) %>% # which posts are related to Apache Spark?
+  select(Id) %>%
+  collect()
+)$Id
+
+spark_tags <-
+  tags %>%
+  filter(
+    (ExcerptPostId %in% spark_tag_wiki_post_ids) | (WikiPostId %in% spark_tag_wiki_post_ids),
+    Count >= 10,
+    TagName != "dataframe"
+  ) %>%
+  select(Id, TagName, Count) %>%
+  collect()
+
+spark_tags
+```
+
+
+```{r}
+# https://stackoverflow.com/questions/14836754/is-there-an-r-function-to-escape-a-string-for-regex-characters
+quotemeta <- function(string) {
+  str_replace_all(string, "(\\W)", "\\\\\\1")
+}
+
+spark_tags_regex <- paste0(quotemeta(spark_tags$TagName), collapse="|")
+
+spark_questions <-
+  posts %>%
+  filter(PostTypeId == 1) %>%  # questions
+  filter(str_detect(Tags, spark_tags_regex)) %>%  # trick to further filter the questions with the relevant tags
+  select(Id, Title, Body, Score, ViewCount, Tags) %>%
+  mutate(Tags = str_split(Tags, "[<>]")) %>%
+  collect() %>%  # at this point we will materialize to a tbl
+  mutate(Tags = map(Tags, ~ intersect(.x, spark_tags$TagName))) %>% # not supported in arrow so we need to collect before
+  filter(map(Tags, length) > 0)
+  
+```
+
+
+```{r}
+(
+  spark_questions %>%
+  select(Id, Title, Body, Score, ViewCount, Tags) %>%
+  arrange(desc(Score)) %>%
+  slice_head(n=5)
+)
+```
+
+
+```{r}
+
+```

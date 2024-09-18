@@ -14,3 +14,5 @@ In each workshop, an experienced practitioner will cover in some detail a topic 
 |-----------|------------------------------|
 |2019-09-24 | [From prototype to production](from-prototype-to-production) |
 |2020-10-29 | [Transform your R code into a web API with plumber](transform-your-r-code-into-api-with-plumber) |
+|2024-09-17 | [Scale Your Analytics - Leveraging Apache Spark in Python and R](scale-your-analytics) |
+
