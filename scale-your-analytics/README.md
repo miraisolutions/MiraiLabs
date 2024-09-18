@@ -12,10 +12,11 @@ Presentation: ~ 2.5h
 ImpactHub Viadukt - Viaduktstrasse 93, 8005 Zürich
 
 # Schedule
-4:45 pm - Doors open
-5:15 pm - Welcome / Start of workshop
-7:45 pm - End of workshop / closing remarks
-7:45 - 9:00 pm - Apéro at the bar
+
+* 4:45 pm - Doors open
+* 5:15 pm - Welcome / Start of workshop
+* 7:45 pm - End of workshop / closing remarks
+* 7:45 - 9:00 pm - Apéro at the bar
 
 # Prerequisites
 Basic knowledge of Python and/or R is highly recommended. No prior knowledge of Apache Spark and the corresponding language APIs is needed.
