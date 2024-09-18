@@ -1,0 +1,152 @@
+
+---
+title: "Workshop R, SparkR"
+output:
+  html_document:
+    toc: true
+---
+
+
+```{r}
+require(SparkR)
+require(magrittr)
+
+spark <- sparkR.session()
+```
+
+
+```{r}
+tags_schema <- structType(
+    structField("Id", "bigint", nullable = FALSE),
+    structField("TagName", "string", nullable = FALSE),
+    structField("Count", "integer", nullable = FALSE),
+    structField("ExcerptPostId", "bigint", nullable = TRUE),
+    structField("WikiPostId", "bigint", nullable = TRUE)
+)
+tags <- read.df("/mnt/mirai/so/tags.parquet", source = "parquet", schema = tags_schema)
+
+posts_schema <- structType(
+    structField("Id", "bigint", nullable = FALSE),
+    structField("PostTypeId", "smallint", nullable = FALSE),
+    structField("AcceptedAnswerId", "bigint", nullable = TRUE),
+    structField("ParentId", "bigint", nullable = TRUE),
+    structField("CreationDate", "timestamp", nullable = FALSE),
+    structField("Score", "integer", nullable = FALSE),
+    structField("ViewCount", "integer", nullable = TRUE),
+    structField("Body", "string", nullable = FALSE),
+    structField("OwnerUserId", "bigint", nullable = TRUE),
+    structField("OwnerDisplayName", "string", nullable = TRUE),
+    structField("LastEditorUserId", "bigint", nullable = TRUE),
+    structField("LastEditorDisplayName", "string", nullable = TRUE),
+    structField("LastEditDate", "timestamp", nullable = TRUE),
+    structField("LastActivityDate", "timestamp", nullable = FALSE),
+    structField("Title", "string", nullable = TRUE),
+    structField("Tags", "string", nullable = TRUE),
+    structField("AnswerCount", "integer", nullable = TRUE),
+    structField("CommentCount", "integer", nullable = TRUE),
+    structField("ClosedDate", "timestamp", nullable = TRUE),
+    structField("CommunityOwnedDate", "timestamp", nullable = TRUE),
+    structField("ContentLicense", "string", nullable = FALSE)
+)
+posts <- read.df("/mnt/mirai/so/posts.parquet", source = "parquet", schema = posts_schema)
+
+```
+
+
+```{r}
+# Which post types are tag wiki entries?
+is_tag_wiki <- column("PostTypeId") %in% c(4, 5)
+
+# Which posts are related to Apache Spark?
+is_post_related_to_apache_spark <- contains(column("Body"), "apache spark") | 
+  contains(column("Body"), "spark.apache.org")
+
+# What are the IDs of the tag wiki posts which are related to Apache Spark?
+spark_tag_wiki_post_ids <-
+  posts %>% 
+  withColumn("Body", lower(column("Body"))) %>%
+  filter(is_tag_wiki & is_post_related_to_apache_spark) %>%
+  select("Id")
+
+# Which tags are related to Apache Spark according to their wiki entry or excerpt?
+spark_tags <-
+  tags %>%
+  alias("t") %>%
+  join(alias(spark_tag_wiki_post_ids, "tw1"), column("t.ExcerptPostId") == column("tw1.Id"), joinType = "left") %>%
+  join(alias(spark_tag_wiki_post_ids, "tw2"), column("t.WikiPostId") == column("tw2.Id"), joinType = "left") %>%
+  filter(
+    (isNotNull(column("tw1.Id")) | isNotNull(column("tw2.Id"))) & 
+    (column("t.Count") >= 10) & 
+    (column("t.TagName") != "dataframe")
+  ) %>%
+  select(column("t.Id"), column("t.TagName"), column("t.Count")) %>%
+  persist("MEMORY_ONLY")
+```
+
+
+```{r}
+display(spark_tags)
+```
+
+
+```{r}
+questions <- posts %>% filter(column("PostTypeId") == 1)
+
+spark_tags_array <-
+  spark_tags %>%
+  groupBy() %>%
+  agg(alias(collect_set(spark_tags$TagName), "SparkTags"))
+
+createOrReplaceTempView(questions, "questions")
+createOrReplaceTempView(spark_tags_array, "spark_tags_array")
+
+# Determine which questions are related to Apache Spark;
+# this is done in SQL here since SparkR does not yet provide an API for
+# operating on array columns
+spark_questions <- sql("
+  WITH questions_with_spark_tags AS (
+    SELECT
+      Id,
+      PostTypeId,
+      AcceptedAnswerId,
+      ParentId
+      CreationDate,
+      Score,
+      ViewCount,
+      Body,
+      OwnerUserId,
+      OwnerDisplayName,
+      LastEditorUserId,
+      LastEditorDisplayName,
+      LastEditDate,
+      LastActivityDate,
+      Title,
+      array_intersect(split(Tags, '[<>]'), SparkTags) AS Tags,
+      AnswerCount,
+      CommentCount,
+      ClosedDate,
+      CommunityOwnedDate,
+      ContentLicense,
+      Year
+    FROM questions
+    CROSS JOIN spark_tags_array
+  )
+  SELECT *
+  FROM questions_with_spark_tags
+  WHERE size(Tags) > 0
+")
+```
+
+
+```{r}
+spark_questions %>%
+  arrange("Score", decreasing = TRUE) %>%
+  limit(5) %>%
+  select("Id", "Title", "Body", "Score", "ViewCount", "Tags") %>%
+  display()
+```
+
+
+```{r}
+
+```
